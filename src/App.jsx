@@ -25,7 +25,7 @@ export default function App() {
       {!appStarted ? (
         // Start-Bildschirm
         <div className="w-screen h-screen bg-slate-900 flex flex-col items-center justify-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-8">Willkommen/Benvenuti/Selamat datang</h1>
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-8">Willkommen <br /> Benvenuti <br /> Selamat datang</h1>
           <button
             onClick={handleStart}
             className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-10 rounded-lg transition-colors duration-300 text-2xl"
@@ -345,17 +345,28 @@ function IntroAnimation({ onFinish }) {
 
 
       {/* Bildphase */}
-      <animated.div style={imgFade} className={`absolute inset-0 z-50 ${phase === 'image' ? '' : 'pointer-events-none'}`}>
-        <img
-          src={finalImagePath}
-          alt="Gastgeber"
-          className="w-full h-full object-cover"
-          loading="eager"
-          fetchpriority="high"
-          onError={() => console.error('Bild nicht gefunden:', finalImagePath)}
-        />
-        <div className="absolute inset-0 bg-black/10" />
-      </animated.div>
+{/* Fullscreen Bild – 5.5s sichtbar, dann onFinish */}
+<animated.div
+  style={imgFade}
+  className={`fixed inset-0 z-50 ${phase === 'image' ? '' : 'pointer-events-none'}`}
+>
+  {/* dunkler Hintergrund, damit Letterboxing nicht weiß ist */}
+  <div className="absolute inset-0 bg-black" />
+
+  <img
+    src={finalImagePath}
+    alt="Gastgeber"
+    /* WICHTIG: object-contain statt object-cover */
+    className="absolute inset-0 m-auto max-w-[100vw] max-h-[100svh] w-auto h-auto object-contain"
+    loading="eager"
+    fetchpriority="high"
+    onError={() => console.error('Bild nicht gefunden:', finalImagePath)}
+  />
+
+  {/* Optional: leichtes Overlay weg lassen, sonst wirkt es „ausgewaschen“ */}
+  {/* <div className="absolute inset-0 bg-black/10" /> */}
+</animated.div>
+
     </div>
   );
 }
@@ -460,7 +471,7 @@ function Quiz({ onCorrectAnswer }) {
     <div className="w-[92vw] max-w-md mx-auto bg-slate-800 p-6 rounded-xl shadow-2xl text-center">
       <div className="flex justify-between mb-4 text-lg font-bold">
         <span>❤️ Leben: {lives}</span>
-        <span>✅ Richtig: {correctCount} / 10</span>
+        <span>✅ Richtig: {correctCount} / 5</span>
       </div>
 
       <h2 className="text-2xl font-bold mb-4">{q.text}</h2>
