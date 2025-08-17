@@ -307,7 +307,7 @@ function IntroAnimation({ onFinish }) {
         >
           Verrückte&nbsp;Party&nbsp;—&nbsp;Let’s&nbsp;Go!<br />
           <span className="text-indigo-200/90 text-xl sm:text-2xl md:text-3xl">
-            Samstag, 30 August 2025 <br /> ab 15:00 Uhr
+            Samstag, 30 August 2025 <br /> ab 15:00 Uhr <br /> Leckeres Essen & kühle Drinks warten auf dich
           </span>
         </animated.h1>
       </div>
